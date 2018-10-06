@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="text-stage">
+      <div class="text-stage_x-axis-measure"></div><!-- x200 but maybe unneeded  -->
+      <div class="text-stage_line-end"></div>
+      <div class="text-stage_line-zone text-stage_line-1-top-furthest"></div>
+      <div class="text-stage_line-zone text-stage_line-1-top-far"></div>
+      <div class="text-stage_line-zone text-stage_line-1-top-near"></div>
+      <div class="text-stage_line-zone text-stage_line-1-top-nearest text-stage_line-2-top-furthest"></div>
+      <div class="text-stage_line-zone text-stage_line-1-text-wrapper text-stage_line-2-top-far">
+        <div class="text-stage_line-1-text"></div>
+      </div>
+      <div class="text-stage_line-zone text-stage_line-1-bottom-nearest text-stage_line-2-top-near"></div>
+      <div class="text-stage_line-zone text-stage_line-1-bottom-near text-stage_line-2-top-nearest text-stage_line-3-top-furthest"></div>
+      <div class="text-stage_line-zone text-stage_line-1-bottom-far text-stage_line-2-text-wrapper text-stage_line-3-top-far">
+        <div class="text-stage_line-2-text"></div>
+      </div>
+      <div class="text-stage_line-zone text-stage_line-1-bottom-furthest text-stage_line-2-bottom-nearest text-stage_line-3-top-near"></div>
+      <div class="text-stage_line-zone text-stage_line-2-bottom-near text-stage_line-3-top-nearest text-stage_line-4-top-furthest"></div>
+      <div class="text-stage_line-zone text-stage_line-2-bottom-far text-stage_line-3-text-wrapper text-stage_line-4-top-far">
+        <div class="text-stage_line-3-text"></div>
+      </div>
+      <div class="text-stage_line-zone text-stage_line-2-bottom-furthest text-stage_line-3-bottom-nearest text-stage_line-4-top-near"></div>
+      <div class="text-stage_line-zone text-stage_line-3-bottom-near text-stage_line-4-top-nearest text-stage_line-5-top-furthest"></div>
+      <div class="text-stage_line-zone text-stage_line-3-bottom-far text-stage_line-4-base text-stage_line-5-top-far"></div>
+      <div class="text-stage_line-zone text-stage_line-3-bottom-furthest text-stage_line-4-bottom-nearest text-stage_line-5-top-near"></div>
+
+    </div>
+    <input type="text" id="text-input" class="text-input" autocomplete="off"/>
+    <div id="result">
+      <h4>on keydown value</h4>
+      <div id="onkeydown-result"></div>
+      <h4>on input value</h4>
+      <div id="oninput-result"></div>
+      <h4>typed value</h4>
+      <div id="typedvalue-result"></div>
+    </div>
+
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+    <script type="text/javascript" src="scripts/javascript.js"></script>
+  </body>
+</html>
+
+<!--
+Will jQuery's .position() work to locate transformed elements?
+-->
+
+<!--
+Detect fonts using https://gist.github.com/szepeviktor/d28dfcfc889fe61763f3
+Compare with set list of fonts
+Create array of shared results
+Use random font from shared results for each character
+-->
