@@ -18,14 +18,17 @@ body p {
   display: inline-block;
   font-size-adjust: 0.58;
   vertical-align: middle;
+  margin: 0;
 }
 
 body {padding-top: 30px;}
 
 .text-stage_line-zone {width:100%; height: 20px; background-color: hsla(0,0%,0%,0.1);}
 .text-stage_line-1-text-wrapper, .text-stage_line-2-text-wrapper, .text-stage_line-3-text-wrapper {position: relative; background-color: hsla(300,100%,50%,0.1);}
-.text-stage_line-end {position: relative; width: 3%; height: 160px;float: right; z-index: -1; background-color: hsla(0,0%,0%,0.2);}
-.text-stage_line-1-text {position: absolute; top: 50%; transform: translate(0, -50%); background-color: hsla(0,100%,50%,0.1);}
+/*TEXT-STAGE_LINE-END NEEDS TO TAKE UP FULL LENGTH*/
+.text-stage_line-end {position: relative; width: 5%; height: 160px;float: right; z-index: -1; background-color: hsla(0,0%,0%,0.2);}
+.text-stage_output {position: absolute; top: 50%; transform: translate(0, -50%);}
+.text-stage_line--active {background-color: hsla(0,100%,50%,0.1);}
 
 .text-wrapper {position: relative;}
 
@@ -38,7 +41,16 @@ body {padding-top: 30px;}
 .text-wrapper {width: 100%; height: 20px;}
 .text {position: absolute; background-color: hsla(0,100%,50%,0.1);}
 
-
+.rotateThis:nth-child(1) {transform: rotate(0deg);}
+.rotateThis:nth-child(2) {transform: rotate(5deg);}
+.rotateThis:nth-child(3) {transform: rotate(10deg);}
+.rotateThis:nth-child(4) {transform: rotate(20deg);}
+.rotateThis:nth-child(5) {transform: rotate(30deg);}
+.rotateThis:nth-child(6) {transform: rotate(50deg);}
+.rotateThis:nth-child(7) {transform: rotate(60deg);}
+.rotateThis:nth-child(8) {transform: rotate(70deg);}
+.rotateThis:nth-child(9) {transform: rotate(80deg);}
+.rotateThis:nth-child(10) {transform: rotate(90deg);}
 
 /*p:first-child { transform: rotate(6deg); }*/
 /*p:nth-child(1) { color: lightblue; transform: rotate(6deg) translate(0,0rem);}

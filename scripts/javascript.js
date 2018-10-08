@@ -5,69 +5,74 @@ $(document).ready(function () {
   $(document).click(function() {$('input').focus();});
 
 
-  // BASIC BELL CURVE var baseWeights = [0.0014, 0.0032, 0.0068, 0.0134, 0.0239, 0.039, 0.0584, 0.0798, 0.0997, 0.114, 0.1192, 0.114, 0.0997, 0.0798, 0.0584, 0.039, 0.0239, 0.0134, 0.0068, 0.0032, 0.0014]; // probabilities
-  var baseWeights = [0.0014, 0.0032, 0.0068, 0.0134, 0.0239, 0.039, 0.0584, 0.0798, 0.0997, 0.114, 0.1192, 0.114, 0.0997, 0.0798, 0.0584, 0.039, 0.0239, 0.0134, 0.0068, 0.0032, 0.0014];
-  var results = [-1, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]; // values to return
+  // BASIC BELL CURVE var baseYAxisWeights = [0.0014, 0.0032, 0.0068, 0.0134, 0.0239, 0.039, 0.0584, 0.0798, 0.0997, 0.114, 0.1192, 0.114, 0.0997, 0.0798, 0.0584, 0.039, 0.0239, 0.0134, 0.0068, 0.0032, 0.0014]; // probabilities
+  var baseYAxisWeights = [0.0014, 0.0032, 0.0068, 0.0134, 0.0239, 0.039, 0.0584, 0.0798, 0.0997, 0.114, 0.1192, 0.114, 0.0997, 0.0798, 0.0584, 0.039, 0.0239, 0.0134, 0.0068, 0.0032, 0.0014];
+  var yAxisResults = [-1, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]; // values to return
 
-  function getRandom (x) {
+  var baseDEGWeights = [0.00021, 0.00048, 0.00102, 0.00201, 0.003585, 0.00585, 0.00876, 0.01197, 0.014955, 0.0171, 0.86812, 0.0171, 0.014955, 0.01197, 0.00876, 0.00585, 0.003585, 0.00201, 0.00102, 0.00048, 0.00021]
+  var DEGResults = [-90, -89, -75, -60, -45, -30, -20, -10, -5, -2.5, 0, 2.5, 5, 10, 20, 30, 45, 60, 75, 89, 90]
+
+  function getRandomYAxis (x) {
       var weights = x
       var num = Math.random(),
           s = 0,
           lastIndex = weights.length - 1;
-
       for (var i = 0; i < lastIndex; ++i) {
           s += weights[i];
           if (num < s) {
-              return `translate(0,${results[i]}rem)`;
+              return yAxisResults[i];
           }
       }
-
-      return results[lastIndex];
+      return yAxisResults[lastIndex];
   };
 
-  console.log (getRandom(baseWeights))
+  function getRandomDEG (x) {
+      var weights = x
+      var num = Math.random(),
+          s = 0,
+          lastIndex = weights.length - 1;
+      for (var i = 0; i < lastIndex; ++i) {
+          s += weights[i];
+          if (num < s) {
+              return DEGResults[i];
+          }
+      }
+      return DEGResults[lastIndex];
+  };
+
+  function startNewLine() {
+    $('.text-stage_line--active').removeClass('text-stage_line--active');
+    currentLine += 1;
+    var activeLineClass = `.text-stage_line-${currentLine}-text`;
+    $(activeLineClass).addClass('text-stage_line--active');
+    currentRandomREMTotal = 0;
+  };
 
 
-// input interpreter (complexity is due to working around Android's 'keycode 229' issue) and outputer
-  // var input = document.getElementById("text-input"),
-  //     oldValue,
-  //     newValue,
-  //     difference = function(value1, value2) {
-  //       var output = [];
-  //       for(i = 0; i < value2.length; i++) {
-  //         if(value1[i] !== value2[i]) {
-  //           output.push(value2[i]);
-  //         }
-  //       }
-  //       return output.join("");
-  //     },
-  //     keyDownHandler = function(e) {
-  //       oldValue = input.value;
-  //       document.getElementById("onkeydown-result").innerHTML = input.value;
-  //     },
-  //     inputHandler = function(e) {
-  //
-  //       var edgeOfActiveText = $('.text-stage_line-1-text').offset().left + $('.text-stage_line-1-text').width();;
-  //       var edgeOfLineEnd = $('.text-stage_line-end').offset().left;
-  //
-  //       newValue = input.value;
-  //       document.getElementById("oninput-result").innerHTML = input.value;
-  //       document.getElementById("typedvalue-result").innerHTML = difference(oldValue, newValue);
-  //       $('.text-stage_line-1-text')
-  //         .append(`<p>${difference(oldValue, newValue)}</p>`);
-  //       console.log('active text end is ' + edgeOfActiveText + ' and end of line is ' + edgeOfLineEnd);
-  //       if (edgeOfActiveText > edgeOfLineEnd) {console.log('end of line');}
-  //     }
-  // ;
-  // input.addEventListener('keydown', keyDownHandler);
-  // input.addEventListener('input', inputHandler);
+// lineDesignA = Black text, rare background color change
+// lineDesignB = Color text, rare background color change
+// lineDesignC = White text, black background with common change
 
 
 
 
+
+// CAN YOU INCLUDE SPACES IN OUTPUT??
   var input = document.getElementById("text-input"),
       oldValue,
       newValue,
+
+      newRandomREM,
+      newYTranslation,
+      currentRandomREMTotal = 0,
+
+      newRandomDEG,
+      newRotation,
+      currentRotationTotal = 0,
+
+      currentLine = 1,
+      newTransformation = 0,
+
       difference = function(value1, value2) {
         var output = [];
         for(i = 0; i < value2.length; i++) {
@@ -79,27 +84,35 @@ $(document).ready(function () {
       },
       keyDownHandler = function(e) {
         oldValue = input.value;
-        document.getElementById("onkeydown-result").innerHTML = input.value;
       },
       inputHandler = function(e) {
 
-        var edgeOfActiveText = $('.text-stage_line-1-text').offset().left + $('.text-stage_line-1-text').width();;
+        var edgeOfActiveText = $('.text-stage_line--active').offset().left + $('.text-stage_line--active').width();;
         var edgeOfLineEnd = $('.text-stage_line-end').offset().left;
 
-        var previousCharYAxis = $('p:last-child').css('transform');
-        var charBeforePreviousYAxis = $('p:nth-last-child(2)').css('transform');
-
-        console.log(previousCharYAxis);
-        console.log(charBeforePreviousYAxis);
+        var previousCharYAxis = parseInt($('p:last-child').css('transform').split(',')[5]);
+        var charBeforePreviousYAxis = parseInt($('p:nth-last-child(2)').css('transform').split(',')[5]);
 
         newValue = input.value;
-        document.getElementById("oninput-result").innerHTML = input.value;
-        document.getElementById("typedvalue-result").innerHTML = difference(oldValue, newValue);
-        $('.text-stage_line-1-text').append(`<p>${difference(oldValue, newValue)}</p>`);
-        // if ($('p:nth-last-child(2)'))
-        $('p:last-child').css({'transform':getRandom(baseWeights)});
-        // console.log('active text end is ' + edgeOfActiveText + ' and end of line is ' + edgeOfLineEnd);
-        // if (edgeOfActiveText > edgeOfLineEnd) {console.log('end of line');}
+
+
+        newRandomDEG = getRandomDEG(baseDEGWeights);
+        newRotation = `rotate(${newRandomDEG + currentRotationTotal}deg)`
+
+
+        newRandomREM = getRandomYAxis(baseYAxisWeights);
+        newYTranslation = `translate(0,${newRandomREM + currentRandomREMTotal}rem)`
+
+        newTransformation = newYTranslation + ' ' + newRotation;
+
+        $('.text-stage_line--active').append(`<p>${difference(oldValue, newValue)}</p>`);
+        $('.text-stage_line--active p:last-child').css({transform:newTransformation});
+        currentRandomREMTotal += newRandomREM
+        currentRotationTotal += newRandomDEG
+
+
+
+        if (edgeOfActiveText > edgeOfLineEnd) {startNewLine();}
       }
   ;
   input.addEventListener('keydown', keyDownHandler);
@@ -108,9 +121,6 @@ $(document).ready(function () {
 
 
 });
-
-
-// getRandom(baseWeights)
 
 
 
