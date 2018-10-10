@@ -23,6 +23,16 @@ body p {
 
 body {padding-top: 30px;}
 
+.text-stage_style-1 {color: black;}
+
+.text-stage_style-2 {}
+
+.text-stage_style-3 {
+  color: white;
+  -webkit-text-stroke: 5px red;
+  paint-order: stroke fill;
+}
+
 .text-stage_line-zone {width:100%; height: 20px; background-color: hsla(0,0%,0%,0.1);}
 .text-stage_line-1-text-wrapper, .text-stage_line-2-text-wrapper, .text-stage_line-3-text-wrapper {position: relative; background-color: hsla(300,100%,50%,0.1);}
 /*TEXT-STAGE_LINE-END NEEDS TO TAKE UP FULL LENGTH*/
@@ -78,4 +88,4 @@ p:nth-child(even) { transform: rotate(18deg); }*/
 /*.text-stage_x-axis-measure {width: 0.5%; height: 100%; display: inline-block; margin: 0; padding: 0;}
 .stripe:nth-child(odd) {background-color: black;}*/
 
-/*input {position: absolute; top: -1000px;}*/
+input {position: absolute; top: -1000px;}
