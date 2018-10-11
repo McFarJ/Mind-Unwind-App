@@ -5,9 +5,9 @@ $(document).ready(function () {
   $(document).click(function() {$('input').focus();});
 
   var storedStyleNum = '1';
+  var backgroundImage;
 
-  // GET ROTATION OF PREVIOUS <P>, IF POSITIVE, USE RESPECTIVE WEIGHTS; IF NEGATIVE, DITTO
-  // READING THE ROTATION FROM .CSS() IS A PAIN, RECORD PRIOR ROTATION ENTRY AND READ THAT TO DETERMINE WEIGHTS.
+  // INSERT RANDOM Y-AXIS STARTING POINT
   // BASIC BELL CURVE var baseYAxisWeights = [0.0014, 0.0032, 0.0068, 0.0134, 0.0239, 0.039, 0.0584, 0.0798, 0.0997, 0.114, 0.1192, 0.114, 0.0997, 0.0798, 0.0584, 0.039, 0.0239, 0.0134, 0.0068, 0.0032, 0.0014]; // probabilities
   var baseYAxisWeights = [0.0014, 0.0032, 0.0068, 0.0134, 0.0239, 0.039, 0.0584, 0.0798, 0.0997, 0.114, 0.1192, 0.114, 0.0997, 0.0798, 0.0584, 0.039, 0.0239, 0.0134, 0.0068, 0.0032, 0.0014];
   var yAxisResults = [-1, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]; // values to return
@@ -38,18 +38,6 @@ $(document).ready(function () {
   // LINE 1: initial color black, 2% chance of changing color, 10% chance of changing back;
   // LINE 2: initial color random, 10% chance of changing color
   // LINE 3: color white;
-
-
-  // add *3 to each non-0 result in negativeDEGWeights(A/B),
-  // 0.09234, 0.080757, 0.064638, 0.047304, 0.03159, 0.019359, 0.010854, 0.005508, 0.002592, 0.001134
-  // subtract difference between above numbers and negativeDEGWeights(A/B)
-  // 0.06156, 0.053838, 0.043092, 0.031536, 0.02106, 0.012906, 0.007236, 0.003672, 0.001728, 0.000756
-  // add the sum and subtract it from baseDEGWeights[10] for negativeDEGWeights concatination.
-  // 0.86812 - 0.237384 = 0.630736 ... <This didn't work the way I thought it would...
-  // Double check all weights add to 1...
-  // sum half baseweights besides zero = 0.06594
-  // sum heavyweights besides zero = 0.356076
-  // new zero weight should = 0.577984
 
   function getRandomYAxis (x) {
       var weights = x
@@ -93,7 +81,7 @@ $(document).ready(function () {
       return fontResults[lastIndex];
   };
 
-  // getLineStyle() isn't working
+  // I dont think getLineStyle() is working
   function getLineStyle() {
     var num = Math.floor(Math.random() * 3) + 1;
     if (num == storedStyleNum) {
@@ -119,12 +107,6 @@ $(document).ready(function () {
     $(activeLineClass).addClass(`text-stage_line--active text-stage_style-${newLineStyle}`);
     currentRandomREMTotal = 0;
   };
-
-
-// lineDesignA = Black text, rare background color change
-// lineDesignB = Color text, rare background color change
-// lineDesignC = White text, black background with common change
-
 
 
 
@@ -214,7 +196,14 @@ $(document).ready(function () {
   input.addEventListener('keydown', keyDownHandler);
   input.addEventListener('input', inputHandler);
 
-
+  $.ajax({
+    url: 'https://archillect-api.now.sh/random',
+    method: 'GET',
+    dataType: 'json'
+  }).then(function(data) {
+    backgroundImage = `url("${data.imageSource}")`;
+    $('.text-stage').css({'background-image':backgroundImage});
+  });
 
 });
 
