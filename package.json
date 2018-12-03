@@ -1,0 +1,25 @@
+{
+  "name": "jquery-experience",
+  "version": "1.0.0",
+  "description": "web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/McFarJ/jquery-experience.git"
+  },
+  "author": "Jason McFarlane",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/McFarJ/jquery-experience/issues"
+  },
+  "homepage": "https://github.com/McFarJ/jquery-experience#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "html2canvas": "^1.0.0-alpha.12",
+    "html2canvas-proxy": "^1.0.1",
+    "jquery": "^3.3.1"
+  }
+}

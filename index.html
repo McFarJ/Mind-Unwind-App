@@ -2,14 +2,46 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="public/stylesheets/style.css">
     <link href="https://fonts.googleapis.com/css?family=Cormorant|Fahkwang|IBM+Plex+Mono|IBM+Plex+Serif|Notable|Stylish" rel="stylesheet">
-    <title></title>
+    <title>The Mind Unwind</title>
   </head>
   <body>
 
+<!-- The goal of the “brain drain” is to write down your thoughts in real-time as they are unfolding. Don’t wait. Don’t edit. Don’t second guess. Just write down whatever pops into your mind, even if it’s something as simple as “I don’t know what to write about right now.” -->
+
+<div class="buttonholder">
+<!-- <button id="download-image" class="download-image">save your image</button>
+</div> -->
+
+<!-- Make background image fade in when loaded -->
+<!-- vertically center the app -->
+<!-- Add colors -->
+<!-- Create Accessibility note -->
+<!-- Write code to properly select pics -->
+<!-- Loop audio -->
+<!-- Make random indents for line starts?-->
+
     <div class="text-stage">
-      <div class="text-stage_x-axis-measure"></div><!-- x200 but maybe unneeded  -->
+      <div class="intro" data-html2canvas-ignore="true">
+        <p class="intro_title">the mind unwind</p>
+        <p class="intro_main-text">this stream of consciousness exercise can help relieve anxiety, 'over-thinking', and stress.<br>type anything that comes to your mind, as it comes. without planning or restrictions, even if it’s something as simple as “i don’t know what to write about right now...” don't pause or stop typing until prompted.<br><br>click okay and begin typing.</p>
+        <div class="intro_buttons-group">
+          <a class="intro_button" href="#">ok</a>
+        </div>
+      </div>
+      <div class="outro" data-html2canvas-ignore="true">
+        <p class="outro_title">your session is over</p>
+        <p class="outro_main-text">what lies behind you and what lies in front of you pales in comparison to what lies inside of you. -ralph waldo emerson</p>
+        <div class="outro_buttons-group">
+          <a class="outro_button outro_background-button" href="#">change background</a>
+          <a class="outro_button outro_save-button" href="#">save your image</a>
+          <a class="outro_button outro_restart-button" href="#">restart</a>
+          <a class="outro_button" href="#">toggle audio</a>
+        </div>
+        <p class="outro_footnote">you can end a session at any time by typing the '^' symbol.</p>
+      </div>
+      <!-- <div class="text-stage_x-axis-measure"></div><!-- x200 but maybe unneeded  -->
       <div class="text-stage_line-end"></div>
       <div class="text-stage_line-zone text-stage_line-1-top-furthest"></div>
       <div class="text-stage_line-zone text-stage_line-1-top-far"></div>
@@ -63,15 +95,16 @@
       <div class="text-stage_line-zone text-stage_line-9-bottom-far text-stage_line-10-text-wrapper">
         <div class="text-stage_line-10-text text-stage_output"><p></p><p></p></div>
       </div>
-
     </div>
+
     <input type="text" id="text-input" class="text-input" autocomplete="off"/>
 
     <script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
-    <script type="text/javascript" src="scripts/javascript.js"></script>
+    <script src="dev/scripts/html2canvas.js"></script>
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
 
