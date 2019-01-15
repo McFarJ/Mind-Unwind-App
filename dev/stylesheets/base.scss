@@ -1,119 +1,78 @@
 @import 'normalize';
 @import 'config';
 
+* {font-size-adjust: 0.58;}
 
-/** {
-  letter-spacing: 0.1
-}*/
+.stored-background-image, {display: none;}
 
-.stored-background-image {display: none;}
-
-.save-message {display: none;}
-
-body p {
-  display: inline-block;
-  font-size-adjust: 0.58;
-  // vertical-align: middle;
-  margin: 0;
-
-
-   	
-  // text-shadow: 
-  //              1px 1px 0.5px rgb(231, 228, 228),
-  //              1px -1px 0.5px rgb(231, 228, 228),
-  //              -1px 1px 0.5px rgb(231, 228, 228),
-  //              -1px -1px 0.5px rgb(231, 228, 228),
-
-  //              0px -1px 0.5px rgb(231, 228, 228),
-  //              0px 1px 0.5px rgb(231, 228, 228),
-  //              -1px 0px 0.5px rgb(231, 228, 228),
-  //              1px 0px 0.5px rgb(231, 228, 228),
-
-  //              2px 2px 0.5px rgb(231, 228, 228),
-  //              2px -2px 0.5px rgb(231, 228, 228),
-  //              -2px 2px 0.5px rgb(231, 228, 228),
-  //              -2px -2px 0.5px rgb(231, 228, 228),
-
-  //              0px -2px 0.5px rgb(231, 228, 228),
-  //              0px 2px 0.5px rgb(231, 228, 228),
-  //              -2px 0px 0.5px rgb(231, 228, 228),
-  //              2px 0px 0.5px rgb(231, 228, 228);
-}
-
-a {font-size-adjust: 0.58;}
+p {display: inline-block; margin: 0;}
 
 [class$="buttons-group"] {display: flex; justify-content: space-between;}
 
-.text-stage_style-1 {
-  // color: black;
-  // -webkit-text-stroke: 5px hsla(45,10%,92%,0.5);
-  // paint-order: stroke fill;
-}
-
-.text-stage_style-2 {
-  // color: black;
-  // -webkit-text-stroke: 5px hsla(45,10%,92%,0.5);
-  // paint-order: stroke fill;
-}
-
-.text-stage_style-3 {
-  color: white;
-  // -webkit-text-stroke: 5px hsla(45,10%,92%,0.5);
-  // paint-order: stroke fill;
-}
-
 .text-stage {
-  // margin: auto; 
-  background-color: hsla(45,10%,92%,1); 
-  width: 800px; 
+  background-color: $background-color; 
+  width: $app-width; 
+  height: $app-width;
   padding: 30px 0; 
   background-position: center; 
   background-repeat: no-repeat; 
   background-size: contain; 
-  height: $text-stage-height;
   -webkit-transtion: background-color 10s; /* Safari, Chrome and Opera > 12.1 */
      -ms-transition: background-color 10s; /* Internet Explorer */
          transition: background-color 10s;
 }
-// WHEN POSSIBLE, LINK BACKGROUND-IMAGE ATTRIBUTES TO TEXT-STAGE ATTRIBUTES IN CONFIG + REMOVE IMAGE MANIPULATION FROM DEPRICATED TEXT-STAGE BACKGROUND IMAGE
+
 .background-image {
   margin: auto; 
-  background-color: hsla(45,10%,92%,1); 
-  width: 800px; 
+  background-color: $background-color; 
+  width: $app-width; 
+  height: $app-width;
   background-position: center; 
   background-repeat: no-repeat; 
   background-size: contain; 
-  height: $text-stage-height;
 
   // ALL OF THIS MIGHT BE UNWANTED FOR MOBILE
   position: absolute;
-  top: calc(50% - (#{$text-stage-height * .5})); 
-  right: calc(50% - 400px); 
+  top: calc(50% - (#{$app-width} * .5)); 
+  right: calc(50% - (#{$app-width} - (#{$app-width} * .5))); 
 }
 
 .text-stage_line-zone {width:100%; height: 20px; padding-left: 5%;}
-div[class*="text-wrapper"] {position: relative;}
+[class*="text-wrapper"] {position: relative;}
 .text-stage_line-end {position: relative; width: 5%; float: right; z-index: -1;}
 .text-stage_output {position: absolute; top: 50%; transform: translate(0, -50%);}
-/*.text-stage_line--active {background-color: hsla(0,100%,50%,0.1);}*/
 
-.intro, .outro {
-  width: 75%; 
+.intro, .outro, {
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+   -ms-animation: fadein 2s; /* Internet Explorer */
+    -o-animation: fadein 2s; /* Opera < 12.1 */
+       animation: fadein 2s;
+}
+
+.intro, .outro, {
+  width: 77%; 
   position: absolute; 
-  top: 50%; 
   left: 50%; 
   transform: translate(-50%, -50%); 
-  background-color: hsla(0,0%,0%,0.9); 
   padding: 3%; 
   display: block; 
   z-index: 9999; 
   font-family: 'Stylish', sans-serif;
-  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
-     -moz-animation: fadein 2s; /* Firefox < 16 */
-      -ms-animation: fadein 2s; /* Internet Explorer */
-       -o-animation: fadein 2s; /* Opera < 12.1 */
-          animation: fadein 2s;
 }
+
+.intro {top: 50%; display:block;}
+.outro {top: calc(50% + (#{$outro_save-message-height} / 2)); display:none;}
+.outro_main-message {margin-bottom: 2.5%;}
+.outro_main-message, .outro_save-message {padding: 24px;}
+.outro_main-message, .outro_save-message, .intro, {background-color: $dark-base-output-color;}
+.intro_title, .outro_title {color: $titles-color;}
+.intro_main-text, .outro_main-text, .outro_footnote, .outro_save-message {color: $background-color;}
+.intro_button, .outro_button, .save-message_button {color: $button-color;}
+.outro_buttons-group {margin-bottom: 5px;}
+.outro_save-message {opacity: 0; height: $outro_save-message-height;}
+
+
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -138,14 +97,6 @@ div[class*="text-wrapper"] {position: relative;}
     from { opacity: 0; }
     to   { opacity: 1; }
 }
-.intro_title, .outro_title {color: hsla(330,100%,71%,1);}
-.intro_main-text, .outro_main-text, .outro_footnote {color: hsla(45,10%,92%,1);}
-.intro_button, .outro_button {color: hsla(199, 100%, 46%, 1);}
-.intro {display:block;}
-.outro {display:none;}
-
-/*.text-stage_x-axis-measure {width: 0.5%; height: 100%; display: inline-block; margin: 0; padding: 0;}
-.stripe:nth-child(odd) {background-color: black;}*/
 
 input {position: absolute;
   top: -1000px;
@@ -153,6 +104,6 @@ input {position: absolute;
   width: 50%;
 }
 
-
-  // html {margin: 0; padding: 0; height: 100vh;}
-  // body {margin: 0; padding: 0; height: 100vh; min-height: $text-stage-height; display: flex; align-items: center; flex-grow: 1;}
+@media all and (max-height: 800px){
+  .background-image {top:0;}
+}

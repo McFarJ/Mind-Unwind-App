@@ -7,67 +7,43 @@
     <title>The Mind Unwind</title>
   </head>
   <body>
-
-
-<!-- MAKE BACKGROUND IMAGE FADE IN AFTER FULLY LOADED -->
-<!-- X have surrounding div, 'background-image', that takes up the same space that text-stage does -->
-<!-- X make sure nothing broke, text-stage fills background-image and all text-stage's old functions work -->
-<!-- X transfer all image code from text-stage's css to background-image's css, including all related css attributes-->
-<!-- X write a .load() function in the image's Ajax request which targets the hsla of text-stage and transitions it to transparent-->
-<!-- X vertically center the app -->
-<!-- X Make random indents for line starts?-->
-<!-- X FIND SOLUTION TO TEXT STROKE BEING NOT LEGIBLE ON MOBILE (text stroke also not visible in html2canvas.) -->
-
-<!-- Add colors -->
-
-
-<!-- Write code to properly select pics, ignore 40's and 30's etc. -->
-
-<!-- code function so '^' ends session-->
-
-<!-- Loop audio -->
-<!-- https://stackoverflow.com/questions/24462568/how-to-repeat-a-song-by-soundcloud-api -->
-
-<!-- Create Accessibility note -->
-
-
-<!-- // INSERT RANDOM Y-AXIS STARTING POINT (POSSIBLY JUST CHANGE currentRandomREMTotal?) -->
-
-
-
-
-
-
-
-    <img class="stored-background-image">
+    <img class="stored-background-image"/>
     <div class="background-image">
       <div class="text-stage">
         <div class="intro" data-html2canvas-ignore="true">
           <p class="intro_title">the mind unwind</p>
-          <p class="intro_main-text">the goal of the “mind unwind” is to write down your thoughts in real-time as they are unfolding. this stream of consciousness exercise can help relieve anxiety, 'over-thinking', and stress.<br>type anything that comes to your mind, as it comes. without planning or restrictions, even if it’s something as simple as “i don’t know what to write about right now...” don't pause or stop typing until prompted.<br><br>click okay and begin typing.</p>
+          <p class="intro_main-text">the goal of the “mind unwind” is to write down your thoughts in real-time as they are unfolding. this stream of consciousness exercise can help relieve anxiety, 'over-thinking', and stress.
+            <br>type anything that comes to your mind, as it comes. without planning or restrictions, even if it’s something as simple as “i don’t know what to write about right now...” don't pause or stop typing until prompted.
+            <br>
+            <br>click okay and begin typing.
+          </p>
           <div class="intro_buttons-group">
-            <a class="intro_button" href="#">ok</a>
+            <a class="intro_button intro_start-button" href="#">ok</a>
+            <a class="intro_button intro_audio-button" href="#" >toggle audio</a>
           </div>
         </div>
         <div class="outro" data-html2canvas-ignore="true">
-          <p class="outro_title">your session is over</p>
-          <p class="outro_main-text">what lies behind you and what lies in front of you pales in comparison to what lies inside of you. -ralph waldo emerson</p>
-          <div class="outro_buttons-group">
-            <a class="outro_button outro_background-button" href="#">change background</a>
-            <a class="outro_button outro_save-button" href="#">save your image</a>
-            <a class="outro_button outro_restart-button" href="#">restart</a>
-            <a class="outro_button" href="#">toggle audio</a>
+          <div class="outro_main-message">
+            <p class="outro_title">your session is over</p>
+            <p class="outro_main-text">what lies behind you and what lies in front of you pales in comparison to what lies inside of you. -ralph waldo emerson</p>
+            <div class="outro_buttons-group">
+              <a class="outro_button outro_background-button" href="#">change background</a>
+              <a class="outro_button outro_save-button" href="#">save your image</a>
+              <a class="outro_button outro_restart-button" href="#">restart</a>
+              <a class="outro_button outro_audio-button" href="#">toggle audio</a>
+            </div>
+            <p class="outro_footnote">you can end a session at any time by typing the '^' symbol.</p>
           </div>
-          <p class="outro_footnote">you can end a session at any time by typing the '^' symbol.</p>
+          <div class="outro_save-message outro_save-message--hidden">
+            <p>Saving this way takes some time. It can take over a minute for your work to render into an image before you're prompted to download the file.
+              <br>Alternatively you can close these message windows to take your own screenshot.
+            </p>
+            <div class="save-message_buttons-group">
+              <a href="#" class="save-message_button save-message_save-button">save image</a>
+              <a href="#" class="save-message_button save-message_close-button">close message windows</a>
+            </div>
+          </div>    
         </div>
-        <div class="save-message" data-html2canvas-ignore="true">
-          <p>Saving this way takes some time. It can take over a minute for your work to render into an image before you're prompted to download the file.<br>Alternatively you can close these message windows and take your own screenshot.</p>
-          <div class="save-message_buttons-group">
-            <a href="" class="save-message_button save-message_save-button">save image</a>
-            <a href="" class="save-message_button save-message_close-button">close message windows</a>
-          </div>
-        </div>
-        <!-- <div class="text-stage_x-axis-measure"></div> x200 maybe unneeded  -->
         <div class="text-stage_line-end"></div>
         <div class="text-stage_line-zone text-stage_line-1-top-furthest"></div>
         <div class="text-stage_line-zone text-stage_line-1-top-far"></div>
@@ -123,9 +99,7 @@
         </div>
       </div>
     </div>
-
     <input type="text" id="text-input" class="text-input" autocomplete="off"/>
-
     <script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -136,8 +110,9 @@
 </html>
 
 <!--
-Detect fonts using https://gist.github.com/szepeviktor/d28dfcfc889fe61763f3
+Possible future tweak: detect user fonts using https://gist.github.com/szepeviktor/d28dfcfc889fe61763f3
 Compare with set list of fonts
 Create array of shared results
 Use random font from shared results for each character
+^Will save on download time, have larger library/look better.
 -->
