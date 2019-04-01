@@ -339,7 +339,7 @@ p {
 
 .outro_save-message {
   opacity: 0;
-  height: 160.5px;
+  /* height: 160.5px; */
 }
 
 @keyframes fadein {

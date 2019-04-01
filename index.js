@@ -4,6 +4,9 @@ $(document).ready(function () {
 
   $(document).click(function() {$('input').focus();});
 
+  var archillectNum = Math.floor(Math.random() * 9) + 1;
+  var randomBackground = `images/mind-unwind${archillectNum}.jpg`
+
   var storedStyleNum = '1';
 
   var baseYAxisWeights = [0.0014, 0.0032, 0.0068, 0.0134, 0.0239, 0.039, 0.0584, 0.0798, 0.0997, 0.114, 0.1192, 0.114, 0.0997, 0.0798, 0.0584, 0.039, 0.0239, 0.0134, 0.0068, 0.0032, 0.0014],
@@ -92,31 +95,10 @@ $(document).ready(function () {
 
   function getCurrentColors(){
     // Determining the numbers in the results arrays for H(ue) and S(aturation)
-      var H2 = [4, 2],
-      H3 = [5, 6],
-      H4 = [5, 11],
-      H5 = [5, 16],
-      H6 = [5, 21],
-      H7 = [5, 26],
-      H8 = [5,31],
-      H9 = [5, 36],
-      H10 = [11, 40];
+      var H2 = [4, 2],H3 = [5, 6],H4 = [5, 11],H5 = [5, 16],H6 = [5, 21],H7 = [5, 26],H8 = [5,31],H9 = [5, 36],H10 = [11, 40];
+      var S1 = [2, 1],S2 = [2, 3],S3 = [2, 5],S4 = [2, 7],S5 = [2, 9],S6 = [2, 11],S7 = [2, 13],S8 = [2, 15],S9 = [2, 17],S10 = [2, 19];
 
-      var S1 = [2, 1],
-      S2 = [2, 3],
-      S3 = [2, 5],
-      S4 = [2, 7],
-      S5 = [2, 9],
-      S6 = [2, 11],
-      S7 = [2, 13],
-      S8 = [2, 15],
-      S9 = [2, 17],
-      S10 = [2, 19];
-
-      function colorResultHS(x){
-        var result = Math.floor(Math.random() * x[0]) + x[1];
-        return result;
-      }
+      function colorResultHS(x){var result = Math.floor(Math.random() * x[0]) + x[1]; return result;}
 
       var colorWeightsH = [0.0014, 0.0032, 0.0068, 0.0134, 0.0239, 0.039, 0.0584, 0.0798, 0.0997, 0.114, 0.1192, 0.114, 0.0997, 0.0798, 0.0584, 0.039, 0.0239, 0.0134, 0.0068, 0.0032, 0.0014],
           colorResultsH = [-colorResultHS(H10), -colorResultHS(H9), -colorResultHS(H8), -colorResultHS(H7), -colorResultHS(H6), -colorResultHS(H5), -colorResultHS(H4), -colorResultHS(H3), -colorResultHS(H2), -1, 0, 1, colorResultHS(H2), colorResultHS(H3), colorResultHS(H4), colorResultHS(H5), colorResultHS(H6), colorResultHS(H7), colorResultHS(H8), colorResultHS(H9), colorResultHS(H10)]
@@ -305,8 +287,6 @@ $(document).ready(function () {
     currentRandomREMTotal = 0;
   };
 
-  var acceptableArchillectResultsSubdomains = ['78.media', '68.media', '66.media']
-
   function getRandomMargin() {
     var num = Math.floor(Math.random() * 8) - 10;
     var margin = `${num}px`;
@@ -409,27 +389,11 @@ $(document).ready(function () {
   input.addEventListener('input', inputHandler);
 
   // Selecting background image
-  function ArchillectRequest(){
-    $.ajax({
-      url: 'https://archillect-api.now.sh/random',
-      cache: false,
-      method: 'GET',
-      dataType: 'json'
-    }).then(function(data) {
-      if (!data.imageSource.includes(acceptableArchillectResultsSubdomains[0]) && !data.imageSource.includes(acceptableArchillectResultsSubdomains[1]) && !data.imageSource.includes(acceptableArchillectResultsSubdomains[2])){
-        ArchillectRequest();
-        return;
-      }
-      $('.stored-background-image').attr('src', `${data.imageSource}`)
-        .on('load', function() {
-          $(this).remove();
-          $('.background-image').css({'background-image':`url("${data.imageSource}")`});
-          $('.text-stage').css({'background-color':'hsla(45,10%,92%,0)'})
-        })
-    })
+  function setInitBackground(){
+        $('.background-image').css({'background-image': `url(${randomBackground})`});
+        $('.text-stage').css({'background-color':'hsla(45,10%,92%,0)'})
   }
-
-  ArchillectRequest();
+  setInitBackground()
 
   // Button functionality
   $('.intro_start-button').click(function() {
@@ -444,38 +408,25 @@ $(document).ready(function () {
       audio.pause();
       audioOff = true;
     }
-    
   })
   $('.outro_restart-button').click(function() {
     location.reload();
   })
   $('.outro_background-button').click(function() {
-    $('.text-stage').css({'-webkit-transtion': 'background-color 2s', '-ms-transition': 'background-color 2s', 'transition': 'background-color 2s'});
-    $('.text-stage').css({'background-color': 'hsla(45,10%,92%,1)'});
-    $('.background-image').prepend("<img class='stored-background-image'>");
-    $.ajax({
-      url: 'https://archillect-api.now.sh/random',
-      cache: false,
-      method: 'GET',
-      dataType: 'json'
-    }).then(function(data) {
-      if (!data.imageSource.includes(acceptableArchillectResultsSubdomains[0]) && !data.imageSource.includes(acceptableArchillectResultsSubdomains[1]) && !data.imageSource.includes(acceptableArchillectResultsSubdomains[2])){
-        ArchillectRequest();
-        return;
-      }
-      $('.stored-background-image').attr('src', `${data.imageSource}`)
-      .on('load', function() {
-        $(this).remove();
-        $('.background-image').css({'background-image':`url("${data.imageSource}")`});
-        $('.text-stage').css({'background-color':'hsla(45,10%,92%,0)'})
-      })
-    });
+    archillectNum = Math.floor(Math.random() * 9) + 1;
+    randomBackground = `images/mind-unwind${archillectNum}.jpg`
+    $('.background-image').css({'background-image': `url(${randomBackground})`})
   })
-  $('.outro_save-button').click(function(){$('.outro_save-message').css({'opacity':1}).hide().fadeIn('slow');})
+    $('.outro_save-button').click(function(){$('.outro_save-message').css({'opacity':1}).hide().fadeIn('slow');})
   $('.save-message_save-button').click(function() {
-   html2canvas(document.querySelector(".background-image"), {useCORS: true}).then(canvas => {
-      var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream00");
-      window.location.href=image;
+   html2canvas(document.querySelector(".background-image")).then(canvas => {
+    var image = canvas.toDataURL("image/jpeg");
+    var a = document.createElement('A');
+    a.href = image;
+    a.download = 'mind-unwind.jpeg';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
     });
   });
   $('.save-message_close-button').click(function(){
